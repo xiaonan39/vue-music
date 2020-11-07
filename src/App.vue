@@ -1,13 +1,27 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <!-- <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> -->
+      
+      <header></header>
+      <aside></aside>
+      <main></main>
+      <footer></footer>
     </div>
     <router-view />
   </div>
 </template>
-
+<script>
+import Mv from "./views/mv";
+import Music from "./views/music";
+import Recommended from "./views/recommended/index";
+import Discovery from "./views/discovery";
+export default {
+  
+  components:{Mv,Music,Recommended,Discovery}
+}
+</script>
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

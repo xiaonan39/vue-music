@@ -1,6 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import Mv from "./views/mv";
+import Music from "./views/music";
+import Recommended from "./views/recommended/index";
+import Discovery from "./views/discovery";
+
 
 Vue.use(Router);
 
@@ -10,17 +15,24 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      name: "discovery",
+      component: Discovery
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      path: "/mv",
+      name: "mv",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
-    }
+        import(/* webpackChunkName: "about" */ "./views/mv")
+    },
+    {
+      path: "/",
+      name: "recommended",
+      component: Recommended
+    },
+    {
+      path: "/",
+      name: "music",
+      component: Music
+    },
   ]
 });
