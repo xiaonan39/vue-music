@@ -15,9 +15,10 @@ export default {
 
   computed: {},
 
-  mounted: {},
 
-  methods: {}
+  methods: {},
+  mounted(){},
+
 }
 
 </script>

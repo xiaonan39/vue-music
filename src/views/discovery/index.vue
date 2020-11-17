@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div>Discovery</div>
+  <div class="dis_wrap">Discovery</div>
 </template>
 
 <script>
@@ -15,11 +15,15 @@ export default {
 
     computed: {},
 
-    mounted: {},
+    mounted(){},
 
     methods: {}
 }
 
 </script>
 <style lang='scss' scoped>
+  .dis_wrap{
+    background: red;
+    
+  }
 </style>

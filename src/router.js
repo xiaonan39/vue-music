@@ -14,7 +14,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/",
+      path: "/discovery",
       name: "discovery",
       component: Discovery
     },
@@ -25,12 +25,12 @@ export default new Router({
         import(/* webpackChunkName: "about" */ "./views/mv")
     },
     {
-      path: "/",
+      path: "/recommended",
       name: "recommended",
       component: Recommended
     },
     {
-      path: "/",
+      path: "/Music",
       name: "music",
       component: Music
     },

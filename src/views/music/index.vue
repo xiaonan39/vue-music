@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div>musci</div>
+  <div>music</div>
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
 
   computed: {},
 
-  mounted: {},
+  mounted(){},
 
   methods: {}
 }
