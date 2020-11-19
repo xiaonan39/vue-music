@@ -1,4 +1,5 @@
 @import "./color.scss";
+@import "./size.scss";
 
 
 
@@ -14,9 +15,7 @@ html,body{
     border: 0;
     font-color:$font_color;
   }
-  i{ 
-    font-size: 15px;
-  }
+  
   #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     /* 下边的是自己加的 */

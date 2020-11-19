@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 
 import "@/style/index.scss";
+
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';  //切记引用此文件，否则icon不生效
 import VueI18n from 'vue-i18n';
@@ -18,6 +19,7 @@ import locale from 'element-ui/lib/locale';
   }
   }); */
 Vue.use(ElementUI);
+Vue.use(router)
 
 Vue.config.productionTip = false;
 

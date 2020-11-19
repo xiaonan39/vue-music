@@ -1,4 +1,4 @@
-constpath = require('path');//引入path模块
+const path = require('path');//引入path模块
 
 function resolve(dir){
 
@@ -17,7 +17,20 @@ module.exports={
         .set('components',resolve('./src/components'))//set第一个参数：设置的别名，第二个参数：设置的路径
 
     },
-    loaders: [
+    css: {
+        loaderOptions: {
+          sass: {
+            prependData: '@import "@/style/index.scss";'
+          }
+        }
+      },
+    /* rules: [
+        {  
+         test: /\.scss$/,
+         loaders: ["style", "css", "sass"]
+       },
+    ], */
+    /* loaders: [
         {
             test: /\.js$/,
             exclude: /(node_modules|bower_components)/,
@@ -26,11 +39,5 @@ module.exports={
                 presets: ['es2015']
             }
         }
-    ],
-    rules: [
-        {  
-         test: /\.scss$/,
-         loaders: ["style", "css", "sass"]
-       },
-    ]
+    ], */
 }

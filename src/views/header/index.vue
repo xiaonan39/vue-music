@@ -3,15 +3,15 @@
   <div class="top">
       <div class="header_left">
           <div class="header_button">
-              <div>
+              <span>
                 <i class="el-icon-s-home"></i>
-              </div>
-              <div>
+              </span>
+              <span>
                 <i class="el-icon-remove"></i>
-              </div>
-              <div >
-                <i class="el-icon-d-caret color-green"></i>
-              </div>
+              </span>
+              <span >
+                <i class="el-icon-d-caret"></i>
+              </span>
           </div>
           <div class="header_router">
             <span >
@@ -48,16 +48,23 @@ export default {
 }
 
 </script>
-<style lang='scss' scoped>
-i{
-  display: inline-block
+<style lang="scss" scoped>
+@import "@/style/index.scss";
 
-}
+
+
 .top{
   height:100%;
   width:100%;
   display: flex;
   justify-content: space-between;
+}
+.top span{
+  width:15px;
+  height: 15px;
+  border-radius: 15px;
+  font-size:icon-size(16);
+  margin-left: 10px;
 }
 .header_left{
   margin:15px 0;
@@ -70,8 +77,8 @@ i{
   transform: translateY(25%);//可以让它垂直居中
 }
 .header_button>div{
-  width:15px;
   height:15px;
+  font-size: 15px;
   border-radius:15px;
   margin-left:15px; 
 }
@@ -79,16 +86,15 @@ i{
   background: $color_red;
 }
 .header_button>:nth-child(2){
-  background: $yellow;
+  background: $color_yellow;
 }
 .header_button>:nth-child(3){
-  // background: green;
+  background: $color_green;
 }
 .header_router{
   margin-right: 10%;
 }
-.header_router span{
-  width:15px;
-  height: 15px;
-}
+/* .header_router span{
+  font-size: 15px;
+} */
 </style>
