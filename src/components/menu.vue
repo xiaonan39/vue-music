@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div>
+  <div class="menu">
     <router-link to="/discovery">Discovery</router-link>
     <router-link to="/recommended">Recommended</router-link>
     <router-link to="/music">Music</router-link>
@@ -16,8 +16,9 @@ import Discovery from "@/views/discovery";
 export default {
     name:"ch-menu",
     data () {
-        return {
-        };
+      return {
+        menu:[{type:"root",children:menuRoutes}]
+      };
     },
 
     components: {Mv,Music,Recommended,Discovery},
@@ -32,5 +33,14 @@ export default {
 </script>
 <style lang='scss' scoped>
 @import "@/style/index.scss";
+.menu{
+  display: flex;
+  flex-direction: column;
+  font-size: $icon-xxl;
+  margin: 15px 20px 0;
+}
+.menu>a{
+  
+}
     
 </style>

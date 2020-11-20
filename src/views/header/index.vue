@@ -3,15 +3,9 @@
   <div class="top">
       <div class="header_left">
           <div class="header_button">
-              <span>
-                <i class="el-icon-s-home"></i>
-              </span>
-              <span>
-                <i class="el-icon-remove"></i>
-              </span>
-              <span >
-                <i class="el-icon-d-caret"></i>
-              </span>
+            <i class="el-icon-s-home"></i>
+            <i class="el-icon-remove"></i>
+            <i class="el-icon-d-caret"></i>
           </div>
           <div class="header_router">
             <span >
@@ -59,12 +53,12 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.top span{
-  width:15px;
-  height: 15px;
-  border-radius: 15px;
-  font-size:icon-size(16);
-  margin-left: 10px;
+.top i{
+  height:15px;
+  font-size: 15px;
+  border-radius:15px;
+  margin-left:15px; 
+  cursor: pointer;
 }
 .header_left{
   margin:15px 0;
@@ -76,12 +70,7 @@ export default {
   display: flex;
   transform: translateY(25%);//可以让它垂直居中
 }
-.header_button>div{
-  height:15px;
-  font-size: 15px;
-  border-radius:15px;
-  margin-left:15px; 
-}
+
 .header_button>:nth-child(1){
   background: $color_red;
 }
@@ -94,7 +83,5 @@ export default {
 .header_router{
   margin-right: 10%;
 }
-/* .header_router span{
-  font-size: 15px;
-} */
+
 </style>
