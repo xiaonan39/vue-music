@@ -15,7 +15,9 @@ html,body{
     border: 0;
     font-color:$font_color;
   }
-  
+  li,a{
+    list-style:none; 
+  }
   #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     /* 下边的是自己加的 */
@@ -45,13 +47,13 @@ html,body{
     display: flex;
     flex-direction: column;
     height:100%;
-    width:12%
+    width:12%;
+    background: $background_qian
 
   }
   main {
-    background-color: $background_qian;
-    text-align: center;
-    line-height: 160px;
+    // text-align: center;
+    // line-height: 160px;
   }
   /* 若只写first-child则会选中nav及其子元素、孙子元素……的第一个子元素 */
   #nav>:first-child{
@@ -65,3 +67,12 @@ html,body{
     height:100%;
   }
   
+  .el-dialog{
+    background: $background_qian !important;
+    .el-input{
+      margin-bottom: 15px;
+    }
+  } 
+  .el-input{
+    background: $background_qian !important;
+  }

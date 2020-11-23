@@ -3,6 +3,16 @@ $icon-m:16px;
 $icon-l:18px;
 $icon-xl:20px;
 $icon-xxl:22px;
+
+$font-s:15px;
+$font-m:16px;
+$font-l:18px;
+$font-xl:19px;
+$font-xxl:20px;
+
+@function font-size($size){
+    @return $size+ px;
+};
 @function icon-size($size){
     @return $size +px;
 };

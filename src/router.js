@@ -1,10 +1,16 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+/* import Home from "./views/Home.vue";
 import Mv from "./views/mv";
 import Music from "./views/music";
 import Recommended from "./views/recommended/index";
-import Discovery from "./views/discovery";
+import Discovery from "./views/discovery"; */
+
+// 下方的写法显示出来的是函数？
+const Discovery = () =>import('@/views/discovery');
+const Mv = () =>import('@/views/mv');
+const Music = () => import('@/views/music');
+const Recommended = () => import('@/views/recommended')
 
 
 Vue.use(Router);
