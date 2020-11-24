@@ -53,6 +53,7 @@ export default {
 @import "@/style/index.scss";
 .menu{
   font-size: $icon-xl;
+  overflow: auto;
   .menu_wrap{
     overflow: hidden;
     // overflow-y: auto;

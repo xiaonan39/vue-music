@@ -41,9 +41,7 @@
 
 <script>
 import {
-  mapActions as mapUserActions,
-  mapState as mapUserState,
-  mapGetters as mapUserGetters
+  mapActions as mapUserActions,mapState as mapUserState,mapGetters as mapUserGetters
 } from "@/store/helper/user";
 import Chmodal from './modal';
 import storage from 'good-storage';

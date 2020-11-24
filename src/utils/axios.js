@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 import {Loading} from 'element-ui';
 import {confirm} from '@/base/confirm';
 import store from '@/store';
@@ -13,7 +13,7 @@ export const requestAll = createBaseInstance();
 // 所以要在内部插入loading拦截器的处理逻辑
 export const request = createBaseInstance();
 
-mixinLoading(request,interceptors)
+mixinLoading(request.interceptors)
 
 function createBaseInstance(){
     const instance = axios.create({
@@ -31,14 +31,14 @@ function handResponse(response){
     return response.data
 }
 
-let Loading
+let loading
 let loadingCount = 0
 const SET_AXIOS_LOADING = 'global/setAxiosLoading';
 function mixinLoading(interceptors){
     interceptors.request.use(loadingRequestInterceptor);
     interceptors.response.use(loadingResponseInterceptor,loadingResponseErrorInterceptor)
 }
-function loadingRequestInterceptor(){
+function loadingRequestInterceptor(config){
     if(!loading){
         loading = Loading.service({
             target:'body',
@@ -50,7 +50,7 @@ function loadingRequestInterceptor(){
     loadingCount++
     return config
 }
-function loadingResponseInterceptor(){
+function handResponseLoading(){
     loadingCount--
     if (loadingCount === 0) {
       loading.close()
@@ -60,12 +60,11 @@ function loadingResponseInterceptor(){
   }
 
   function loadingResponseInterceptor(response) {
-    handleResponseLoading()
+    handResponseLoading()
     return response
   }
 
   function loadingResponseErrorInterceptor(e) {
-    handleResponseLoading()
+    handResponseLoading()
     throw e
   }
-}

@@ -13,3 +13,9 @@ $background_qian:rgb(246, 246, 246);
 
 $menu_item_hover_bg:#e7e7e7;
 $menu_item_active_bg:#e2e2e2;
+// 引用时函数时 @opacity
+$opacity: 0.7;
+
+@function opacity($num){
+    @return $num 
+}

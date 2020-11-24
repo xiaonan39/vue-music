@@ -14,6 +14,9 @@
           <router-view />
         </main>
       </el-container>
+      <el-container>
+        <footer>---------</footer>
+      </el-container>
     </div>
   </div>
 </template>

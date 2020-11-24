@@ -10,6 +10,7 @@ $font-l:18px;
 $font-xl:19px;
 $font-xxl:20px;
 
+//使用时直接写函数名就行
 @function font-size($size){
     @return $size+ px;
 };
@@ -19,3 +20,11 @@ $font-xxl:20px;
 
 
 
+/* .container {
+   color : purple ;
+   border : 2px dashed purple ;
+}
+.myText {
+   @extend .container; //这里将继承.container类的所有样式
+   font-size : 22px ;
+} */

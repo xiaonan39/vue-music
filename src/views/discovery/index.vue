@@ -1,22 +1,24 @@
 <!--  -->
 <template>
-  <div class="dis_wrap">Discovery</div>
+  <div class="dis_wrap">
+    <banner></banner>
+  </div>
 </template>
 
 <script>
+import Banner from '@/components/banner';
+
 export default {
     name: "discovery",   
     data () {
         return {
         };
     },
-
-    components: {},
-
+    components: {
+      Banner
+    },
     computed: {},
-
     mounted(){},
-
     methods: {}
 }
 
