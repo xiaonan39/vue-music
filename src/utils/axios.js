@@ -1,12 +1,12 @@
 import axios from 'axios'
 import {Loading} from 'element-ui';
-import {confirm} from '@/base/confirm';
+import {confirm} from '@/base/confirm.vue';
 import store from '@/store';
 
 const BASE_URL = "https://api.mtnhao.com";
 
-//不带全局loading的请求实例；
-export const requestAll = createBaseInstance();
+//不带全局loading的请求实例；与api中的user.js中的请求方法一致的
+export const requestWithoutLoading = createBaseInstance();
 
 //带全局loading的请求实例
 // 传入函数是因为需要在处理请求结果handleResponse之前处理loading

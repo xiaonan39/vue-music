@@ -11,9 +11,10 @@ const Discovery = () =>import('@/views/discovery');
 const Mv = () =>import('@/views/mv');
 const Music = () => import('@/views/music');
 const Recommended = () => import('@/views/recommended')
+// import PlaylistDetail from "@/page"
 
 
-Vue.use(Router);
+
 
 export const menuRoutes=[
   {
@@ -25,6 +26,11 @@ export const menuRoutes=[
       icon:"discovery"
     }
   },
+  /* {  mmp这个地方获取不到component会导致页面的二级导航出不来
+    path:'/playlist/:id',
+    name:'playlist',
+    // component:'PlaylistDetail',
+  }, */
   {
     path: "/mv",
     name: "mv",
@@ -54,16 +60,30 @@ export const menuRoutes=[
   },
 ]
 // 此处添加了路由后，下方的routes中就不必再添加了
+Vue.use(Router);
 
 export default new Router({
-  mode: "history",
-  base: process.env.BASE_URL,
+  mode: "hash",
   routes: [
     {
-      path: "/",
-      redirect: "/discovery",
+      path: '/',
+      redirect: '/discovery',
     },
-    
+    {
+      path: "/mv",
+      name: "mv",
+      component: Mv,
+    },
+    {
+      path: "/recommended",
+      name: "recommended",
+      component: Recommended,
+    },
+    {
+      path: "/Music",
+      name: "music",
+      component: Music,
+    },
     ...menuRoutes
   ]
 });

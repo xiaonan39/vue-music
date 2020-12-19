@@ -11,11 +11,13 @@
           <Menu></Menu>
         </aside>
         <main>
+          <div>
           <router-view />
+          </div>
         </main>
       </el-container>
       <el-container>
-        <footer>---------</footer>
+        <footer>--</footer>
       </el-container>
     </div>
   </div>

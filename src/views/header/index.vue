@@ -1,24 +1,24 @@
 <!--  -->
 <template>
   <div class="top">
-      <div class="header_left">
-          <div class="header_button">
-            <i class="el-icon-s-home"></i>
-            <i class="el-icon-remove"></i>
-            <i class="el-icon-d-caret"></i>
-          </div>
-          <div class="header_router">
-            <span >
-              <i class="el-icon-arrow-left color-green"></i>
-            </span>
-            <span >
-              <i class="el-icon-arrow-right color-green"></i>
-            </span>
-          </div>
-      </div>
-      <div class="header_right">
-        lalalal
-      </div>
+    <div class="header_left">
+        <div class="header_button">
+          <i class="el-icon-s-home"></i>
+          <i class="el-icon-remove"></i>
+          <i class="el-icon-d-caret"></i>
+        </div>
+        <div class="header_router">
+          <span >
+            <i class="el-icon-arrow-left color-green"></i>
+          </span>
+          <span >
+            <i class="el-icon-arrow-right color-green"></i>
+          </span>
+        </div>
+    </div>
+    <div class="header_right">
+      lalalal
+    </div>
   </div>
 </template>
 

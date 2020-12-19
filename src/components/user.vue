@@ -2,21 +2,22 @@
 <template>
     <div class="user">
         <!-- 登录前 -->
-        <div class="login_before" @click="dialogVisible = true;openModal()"
+        <div class="login_before" @click="openModal"
             v-if="!isLogin">
             <i class="el-icon-user-solid"></i>
             <span>未登录</span>
         </div>
         <!-- 登陆后 -->
-        <div class="login_after" v-else>
-            <img />
-            <span>已登录</span>
+        <div class="login_after" v-else @click="onLogout">
+            <img  :src="user.avatarUrl" />
+            <span>{{user.nickname}}</span>
         </div>
 
         <!-- 登录框 -->
         <el-dialog
             :title="title"
-            :visible.sync="dialogVisible"
+            :modal="false"
+            :visible.sync="visible"
             width="20%"
             :before-close="handleClose">
             <el-input  placeholder="请输入您的网易云id" v-model="uid"/>
@@ -30,7 +31,7 @@
                 </p>
             </div>
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="login(uid)"
+                <el-button type="primary" @click="onLogin(uid)"
                     class="login_btn">确 定
                 </el-button>
             </span>
@@ -52,7 +53,6 @@ export default {
     props:{},
     data () {
         return {
-            dialogVisible:"",
             title:"登录",
             visible:false,
             uid:"",
@@ -63,7 +63,7 @@ export default {
         Chmodal
     },
     computed: {
-        ...mapUserState(["user"]),
+        ...mapUserState(["user"]),   //此应该是获取的user的数据
         ...mapUserGetters(["isLogin"]),
     },
     watch:{
@@ -71,12 +71,12 @@ export default {
     },
     methods: {
         openModal(){
-            console.log(this.dialogVisible)
+            this.visible = true
         },
         handleClose(done) {
             done();
         },
-        async login(uid){
+        async onLogin(uid){
             this.visible = true;
             const success = await this.login(uid).finally(()=>{
                 this.loading = false;
@@ -88,14 +88,17 @@ export default {
         closeModal(){
             this.visible = false
         },
-        ...mapUserActions(["login", "logout"])
+        onLogout(){
+
+        },
+        ...mapUserActions(["login", "logout"])  //此触发的是store中的user中的actions.js中的login
     },
     mounted(){},
     created(){
         //自动登录
         const uid = storage.get(UID_KEY);
         if(isDef(uid)){
-            this.login(uid)
+            this.onLogin(uid)
         }
     }
 }
@@ -104,6 +107,9 @@ export default {
 <style lang='scss' scoped>
 @import '@/style/index.scss';
 .user{
+    margin: 20px 15px 0;
+    padding-bottom: 15px;
+    height:60px ;
     .login_before{
         padding:20px;
         cursor: pointer;
@@ -114,6 +120,20 @@ export default {
     }
     .login_help{
         font-size: $font-l;
+    }
+    .login_after{
+        height: 100%;
+        display: flex;
+        cursor: pointer;
+        img{
+            height: 100%;
+            border-radius:50px; 
+        }
+        span{
+            // align-items: center
+            margin-left: 10px;
+            line-height: 60px
+        }
     }
 }
 

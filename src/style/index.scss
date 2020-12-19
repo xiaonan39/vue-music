@@ -2,14 +2,11 @@
 @import "./size.scss";
 
 
-
-
-
 html,body{
     width:100%;
     height:100%;
   }
-  html,body,a,span,i,h1,h2,h3,h4,h5,h6,dl,dt,dd,ol,ul,li,tr,th,td{
+  html,body,a,span,i,h1,h2,h3,h4,h5,h6,dl,dt,dd,ol,ul,li,tr,th,td,div,p,select,section,footer,header,aside,main{
     margin:0px;
     padding:0;
     border: 0;
@@ -40,50 +37,54 @@ html,body{
   }
   #nav>:first-child{
     flex-grow: 0;
-    height:80px;
+    height:$header-height;
     background-color: $background_write;
   }
   #nav>:nth-child(2){
-    // display: flex;
     width:100%;
     // flex-grow: 1;
-    // height:80%;
-    overflow: auto;
+    height:calc(100% - #{$header-height});
+    position: relative;
+    display: flex;
+    // overflow: auto;
   }
   #nav>:nth-child(3){
-    width:100%;
-    height:100px;
+    // width:100%;
+    height:80px;
     // flex-grow: 0;
     background: $background_qian;
-    opacity: $opacity;
+    // opacity: $opacity;
     position: fixed;
     bottom: 0;
+    right: 0;
+    left: 0;
   }
   .top {
     background-color: $background_qian;
     opacity: $opacity;
     line-height: 60px;
+    height: $header-height;
   }
   aside {
+    margin: 0;
     display: flex;
     flex-direction: column;
-    height:100%;
     width:12%;
-    background: $background_qian
-
+    background: $background_qian;
+    height:calc(100% - #{$header-height}) ;
   }
   main {
-    // text-align: center;
-    // line-height: 160px;
     flex: 1;
     margin: 0 auto;
     // background: $background_qian;
-    max-width: 60%;
+    margin-bottom: $header-height;
+    overflow-y: auto;
+  }
+  main>div{
+    max-width: 70%;
+    margin: auto;
   }
   /* 若只写first-child则会选中nav及其子元素、孙子元素……的第一个子元素 */
-  footer{
-    
-  }
   .el-dialog{
     background: $background_qian !important;
     .el-input{
