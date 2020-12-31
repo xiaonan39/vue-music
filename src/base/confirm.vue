@@ -33,7 +33,7 @@ export default Confirm
 // 单例减少开销   --虽然听不懂
 let instanceCache
 // 命令式调用；  这种写法不太明白啊
-export const cinfirm = function (text,title,confirm =() =>{}){
+export const confirm = function (text,title,confirm =() =>{}){
     if(typeof title === "function"){
         onConfirm = title;
         title = undefined;

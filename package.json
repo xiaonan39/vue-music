@@ -16,6 +16,7 @@
     "imagvue": "0.0.5",
     "lodash-es": "^4.17.15",
     "path": "^0.12.7",
+    "postcss-pxtorem": "^5.1.1",
     "vue": "^2.6.10",
     "vue-i18n": "^8.22.1",
     "vue-router": "^3.0.3",
@@ -53,7 +54,11 @@
   },
   "postcss": {
     "plugins": {
-      "autoprefixer": {}
+      "autoprefixer": {},
+      "postcss-pxtorem":{
+        "rootValue":14,
+        "propList":["*"]
+      }
     }
   },
   "browserslist": [
