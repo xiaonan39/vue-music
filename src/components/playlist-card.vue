@@ -32,7 +32,6 @@ export default {
     },
     created(){
         this.$nextTick(()=>{
-            console.log(this.image)
         })
     }
 }

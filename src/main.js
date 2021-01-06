@@ -3,6 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import '@/utils/axios';
+import '@/utils/rem.js';
+import Meta from 'vue-meta';
+import * as utils from './utils';
+
 
 import "@/style/index.scss";
 
@@ -20,8 +24,10 @@ messages: {
 }
   }); */
 Vue.use(ElementUI);
-Vue.use(router)
+Vue.use(router);
+Vue.use(Meta);
 
+Vue.prototype.$utils = utils;
 Vue.config.productionTip = false;
 
 new Vue({

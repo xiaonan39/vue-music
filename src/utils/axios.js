@@ -45,7 +45,7 @@ function loadingRequestInterceptor(config){
             background:'transparent',
             text:'载入中',
         })
-        store.commit('SET_AXIOS_LOADING',true)
+        store.commit(SET_AXIOS_LOADING,true)
     }
     loadingCount++
     return config

@@ -2,7 +2,7 @@ import { Notification } from 'element-ui'
 
 export { debounce, throttle } from 'lodash-es'
 
-export function pad(num, n = 2) {
+export function pad(num, n = 2) {  //是长度小于两位数的在前边加0
     let len = num.toString().length
     while (len < n) {
         num = '0' + num

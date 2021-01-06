@@ -42,9 +42,6 @@ export default {
   components: { User },
   computed: {
     menuList() {
-      console.log(this.isLogin && this.userMenus.length
-        ? this.menus.concat(this.userMenus)
-        : this.menus);
       return this.isLogin && this.userMenus.length
         ? this.menus.concat(this.userMenus)
         : this.menus
