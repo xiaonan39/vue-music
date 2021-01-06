@@ -26,7 +26,7 @@
 import Menu from "./components/menu";
 import Header from "./views/header";
 export default {
-  metaInfo(){
+  metaInfo () {
     return{
       title:"cheng-music"
     }

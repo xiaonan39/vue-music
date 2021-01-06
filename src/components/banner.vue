@@ -12,12 +12,12 @@
 <script>
 import { getBanner } from "@/api";
 export default {
-  data() {
+  data () {
     return {
       banners: []
     };
   },
-  async created() {
+  async created () {
     const { banners } = await getBanner();
     this.banners = banners;
   }

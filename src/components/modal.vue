@@ -24,21 +24,21 @@ export default {
     title:{type:String,default:"眉间雪"},
     width:{type:String,default:"30%"},
   },
-  data() {
+  data () {
       return {
         dialogVisible: false
       };
     },
   computed:{
-    data(){
-      console.log(this.dialogVisible)
-      return this.dialogVisible
+    data () {
+      console.log(this.dialogVisible);
+      return this.dialogVisible;
     }
   },
   watch:{
-    data(){
-      console.log(this.dialogVisible)
-      return this.dialogVisible
+    data () {
+      console.log(this.dialogVisible);
+      return this.dialogVisible;
     }
   },
   methods: {
@@ -46,9 +46,9 @@ export default {
         // this.$emit('dialogVisible')
       }
     },
-  mounted(){},
-  created(){
-    console.log("有引用尼玛"+this.dialogVisible)
+  mounted () {},
+  created () {
+    console.log("有引用尼玛"+this.dialogVisible);
   }
 }
 

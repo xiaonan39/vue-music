@@ -1,7 +1,7 @@
 export const  remBase = 14;
 
 let htmlFontSize
-const calc = function(){
+const calc = function () {
     const maxFontSize = 18;
     const minFontSize = 14;
     const html = document.getElementsByTagName('html')[0];
@@ -13,7 +13,7 @@ const calc = function(){
     htmlFontSize = size;
 }
 calc();
-window.onresize = function(){
+window.onresize = function () {
     calc();
 }
 // 根据基准字号计算

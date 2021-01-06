@@ -26,11 +26,11 @@ export default {
         };
     },
     methods: {
-        clickCard(){
+        clickCard () {
                 
         }
     },
-    created(){
+    created () {
         this.$nextTick(()=>{
         })
     }
@@ -41,13 +41,20 @@ export default {
 @import '@/style/index.scss';
 .playlist{
     width: 100%;
+    >span{
+        font-size: $font-xxxl;
+    }
     .playlist_wrap{
             display: flex;
             flex-wrap: wrap;
-                justify-content: space-around;
+            justify-content: space-around;
+            .el-card__body{
+                padding: 0px !important;
+            }
         .playlist_card{
             width: 18%;
             margin-top: 20px;
+            padding: 0px !important;
             font-size: $icon-m;
             position: relative;
             img{

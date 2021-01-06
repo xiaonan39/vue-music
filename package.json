@@ -46,9 +46,18 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "@vue/prettier"
+      "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "space-before-function-paren": [0, "always"],
+      "no-debugger": 1,
+      "indent": ["error", 2, {"SwitchCase": 1}],
+      "quotes": ["error", "double"],
+      "brace-style": ["error", "stroustrup"],
+      "array-bracket-spacing": ["error", "never"],
+      "semi": ["error", "always"],
+      "no-console": ["off"]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

@@ -37,8 +37,8 @@ export default {
 
 
   methods: {},
-  mounted(){},
-  created(){}
+  mounted () {},
+  created () {}
 }
 
 </script>

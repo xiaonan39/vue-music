@@ -34,14 +34,14 @@ import {
 } from "@/store/helper/user";
 export default {
   name: "ch-menu",
-  data() {
+  data () {
     return {
       menus: [{ type: "root", children: menuRoutes }]
     };
   },
   components: { User },
   computed: {
-    menuList() {
+    menuList () {
       return this.isLogin && this.userMenus.length
         ? this.menus.concat(this.userMenus)
         : this.menus
@@ -49,9 +49,9 @@ export default {
     ...mapUserState(["userPlaylist"]),
     ...mapUserGetters(["isLogin", "userMenus"])
   },
-  mounted() {},
+  mounted () {},
   methods: {},
-  created() {
+  created () {
   }
 };
 </script>
