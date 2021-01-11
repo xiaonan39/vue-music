@@ -60,9 +60,14 @@ export default {
     justify-content: space-between;
     .newMv_list{
       cursor: pointer;
-      min-width: 20%;
+      width: 24%;
       margin-bottom: 70px;
       // padding: 0 20px 70px;
+      .newMv_Video{
+        img{
+          width: 100%;
+        }
+      }
       >p{
         margin-top: 10px;
       }

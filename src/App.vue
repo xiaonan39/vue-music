@@ -12,7 +12,7 @@
         </aside>
         <main>
           <div>
-          <router-view />
+            <router-view />
           </div>
         </main>
       </el-container>
