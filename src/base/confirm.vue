@@ -21,6 +21,7 @@ const Confirm = {
   methods: {
     confirmClose() {
       //下边这种语句搞不太懂啊
+      console.log("此处报错？");
       this.onConfirm && this.onConfirm();
       this.visible = false;
     },
@@ -30,8 +31,8 @@ export default Confirm;
 
 // 单例减少开销   --虽然听不懂
 let instanceCache;
-// 命令式调用；  这种写法不太明白啊
-export const confirm = function (text, title, confirm = () => {}) {
+// 命令式调用；  这种写法不太明白啊  0122日出错了，因为onConfirm写成了confirm,但不知道为何走了这；
+export const confirm = function (text, title, onConfirm = () => {}) {
   if (typeof title === "function") {
     onConfirm = title;
     title = undefined;

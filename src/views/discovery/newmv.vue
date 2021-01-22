@@ -35,7 +35,6 @@ export default {
     async getMv() {
       const { result } = await getPersonalizedMv();
       this.mv = result;
-      console.log(this.mv);
     }
   },
 
@@ -73,6 +72,9 @@ export default {
       }
       >:last-child{
         color: $font_color;
+      }
+      .newMv_name{
+        @include text-ellipsis;//单行显示，多行…
       }
     }
   }

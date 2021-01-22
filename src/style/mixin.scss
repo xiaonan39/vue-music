@@ -1,0 +1,17 @@
+/* @mixin bordered($color, $width) {  可以传参可以不传参，不传参就可以不用写括号
+  border: $width solid $color;
+}
+定义默认值：@mixin bordered($color: blue, $width: 1px) {
+  border: $width solid $color;
+}
+使用：.myArticle {
+  @include bordered(blue, 1px);  // 调用混入，并传递两个参数
+} 
+-与_一样
+*/
+
+@mixin text-ellipsis(){
+  overflow: hidden;
+  text-overflow: ellipsis; //单行显示，多行显示……
+  white-space: nowrap;
+}

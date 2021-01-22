@@ -1,6 +1,16 @@
 <!--  -->
 <template>
-  <div class="miniplayer"></div>
+  <div class="miniplayer">
+    <div class="mini_song">
+      <template v-if="hasCurrentSong">
+
+      </template>
+    </div>
+    <div class="mini_control"></div>
+    <div class="mini_mode"></div>
+    <div class="mini_progress"></div>
+    <audio></audio>
+  </div>
 </template>
 
 <script>
@@ -12,7 +22,11 @@ export default {
 
   components: {},
 
-  computed: {},
+  computed: {
+    hasCurrentSong(){
+      // return isDef()
+    }
+  },
 
   mounted () {},
 
