@@ -10,7 +10,8 @@ import Discovery from "./views/discovery"; */
 const Discovery = () =>import('@/views/discovery');
 const Mv = () =>import('@/views/mv');
 const Music = () => import('@/views/music');
-const Recommended = () => import('@/views/recommended')
+const Recommended = () => import('@/views/recommended');
+const RecommendDetail = () =>import('@/views/recommendDetail');
 // import PlaylistDetail from "@/page"
 
 
@@ -50,7 +51,7 @@ export const menuRoutes=[
     }
   },
   {
-    path: "/Music",
+    path: "/music",
     name: "music",
     component: Music,
     meta:{
@@ -75,12 +76,12 @@ export default new Router({
       component: Mv,
     },
     {
-      path: "/recommended",
+      path: "/playlist/:id", //自己写的文件是recommend，但是获取的数据中貌似是playlist,so还是用playlist吧，下方的name和com是不用变的
       name: "recommended",
-      component: Recommended,
+      component: RecommendDetail,
     },
     {
-      path: "/Music",
+      path: "/music",
       name: "music",
       component: Music,
     },

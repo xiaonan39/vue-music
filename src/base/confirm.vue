@@ -5,7 +5,7 @@
     :width="width"
     class="confirm-dialog"
   >
-    <div slot="title">{{ titel || "提示" }}</div>
+    <div slot="title">{{ title || "提示" }}</div>
     <div class="comfirm-body">{{ text }}</div>
     <span slot="footer">
       <el-button @click="confirmClose" type="primary"> 确认 </el-button>
@@ -49,7 +49,7 @@ export const confirm = function (text, title, onConfirm = () => {}) {
       });
       // 生成dom,因为是extend生成的，而不是我们平时常写的组件实例，所以不可以通过 new Vue({ components: testExtend }) 来直接使用，需要通过 new Profile().$mount('#mount-point') 来挂载到指定的元素上。
       instanceCache.$mount();
-      document.body.appendChild(instanceCache, $el);
+      document.body.appendChild(instanceCache.$el);
     } else {
       // 更新属性
       instanceCache.text = text;

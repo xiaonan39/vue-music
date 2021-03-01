@@ -1,9 +1,10 @@
 <!--  -->
 <template>
   <div class="banner">
-    <el-carousel trigger="click"  type="card">
+    <!-- :interval="4000" 为走马灯的自动切换的时间间隔-->
+    <el-carousel trigger="click"  type="card" :interval="4000" class="banner_wrap">
       <el-carousel-item v-for="(item,key) in banners" :key="key">
-        <img :src="item.imageUrl" />
+        <img :src="$utils.genImgUrl(item.imageUrl,1000,300)" class="banner_img"/>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -25,8 +26,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/style/index.scss";
-.banner{
-  // height: 200px;
+.banner_wrap{//>>>作用于css？
+  /deep/.el-carousel__container{
+  height: 300px;
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -42,5 +44,11 @@ export default {
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
 }
+.banner_img{
+  width: 100%;
+  height: 100%;
+}
+}
+
 
 </style>
