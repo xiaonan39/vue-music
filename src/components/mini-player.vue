@@ -1,9 +1,15 @@
-<!--  -->
+<!-- 底部的播放组件 -->
 <template>
   <div class="miniplayer">
+    <!-- 歌曲内容 -->
     <div class="mini_song">
       <template v-if="hasCurrentSong">
-
+        <!-- 盲猜是点击歌曲图像可以出现歌曲的详细信息页面 -->
+        <div @click="togglePlayerShow" class="img_wrap">
+          <!-- 遮罩层？ -->
+          <div class="mask"></div>
+          <img v-lazy="$utils.genImgUrl(currentSong.img,80)" />
+        </div>
       </template>
     </div>
     <div class="mini_control"></div>
@@ -25,14 +31,29 @@ export default {
   components: {},
   computed: {
     hasCurrentSong() {
+      console.log(this.currentSong);
       return isDef(this.currentSong.id);
     },
     audio() {
       return this.$refs.audio;
-    }
+    },
+    ...mapState([
+      "currentSong",
+      "currentTime",
+      "playing",
+      "playMode",
+      "isPlaylistShow",
+      "isPlaylistPromptShow",
+      "isPlayerShow"
+    ]),
+    ...mapGetters(["nextSong","prevSong"]),
+    /* prevSong() {//这种方法无效，可能和命名空间有关系
+      return this.$store.getters.prevSong;
+    } */
   },
   watch: {
     currentSong(newSong, oldSong){  //是template中传入的参数吗？
+      console.log("有吗有吗");
       if(!newSong.id) { //是清空了歌曲？
         this.audio.pause();
         this.audio.currentTime = 0;
@@ -44,10 +65,20 @@ export default {
         this.play();//methods中的事件
         return;
       }
+      this.songReady = false;
+      if(this.timer) {
+        clearTimeout(this.timer);
+      }
+      this.timer = setTimeout(()=> {
+        this.play();
+      },1000)
+    },
+    playing(newPlaying) {
+      this.$nextTick(() => {
+        newPlaying ? this.play() : this.pause();
+      })
     }
   },
-  mounted () {},
-
   methods: {
     async play() {
       if(this.songReady) {
@@ -63,9 +94,13 @@ export default {
            this.setPlayingState(false);
         }
       }
-    }
+    },
+    togglePlayerShow() {
+      this.setPlayerShow(!this.isPlayerShow);
+    },
+    ...mapMutations(["setPlayerShow","setCurrentTime","setPlayingState","setPlayMode","setPlaylistShow"])
   },
-
+  mounted () {},
   created () {}
 
 }

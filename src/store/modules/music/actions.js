@@ -21,7 +21,7 @@ export default{
     const findedIndex = playHistoryCopy.findIndex(({id}) => song.id === id);
     if(findedIndex !== -1) {
       // 删除旧那一项，插入到最前面
-      playHistoryCopy,splice(findedIndex,1);
+      playHistoryCopy.splice(findedIndex,1);
     }
     playHistoryCopy.unshift(song);
     commit('setPlayHistory',playHistoryCopy);

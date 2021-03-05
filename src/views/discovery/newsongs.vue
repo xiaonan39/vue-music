@@ -62,8 +62,10 @@ export default {
     clickSong (item,index) {//两个参数应该是列的下标及在列中的下标()
       const nomalizedSongIndex = this.getSongOrder(item, index) - 1;
       const nomalizedSong = this.normalizedSongs[nomalizedSongIndex];
+      console.log(nomalizedSong);
+      console.log(this.normalizedSongs);
       this.startSong(nomalizedSong);
-      this.setPlayList(this.normalizedSongs);
+      this.setPlaylist(this.normalizedSongs);
     },
     order (index, itemIndex) {
       let order = index * this.songLength + itemIndex + 1;
@@ -74,8 +76,12 @@ export default {
       song:{mvid,artists,album:{blurPicUrl},duration}} = song;
       return createSong({id,name,img:blurPicUrl,artists,duration,mvId:mvid});
     },
-    ...mapMutations(['setPlayList']),
-    ...mapActions(["startSong"]),
+    ...mapMutations(["setPlaylist"]),
+    ...mapActions(['startSong'])
+    /* startSong() {//用此方法会找不到actions中的startSong函数，貌似是因为命名空间的原因
+      console.log("===============");
+      this.$store.dispatch("startSong");
+    } */
   },
   mounted () {
 
