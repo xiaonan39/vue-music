@@ -42,6 +42,7 @@ function padLeftZero(str) {
   return ("00" + str).substr(str.length);
 }
 
+// 播放歌曲的时间
 export function formatTime(interval) {
   interval = interval | 0;
   const minute = pad((interval / 60) | 0);

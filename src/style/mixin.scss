@@ -15,3 +15,11 @@
   text-overflow: ellipsis; //单行显示，多行显示……
   white-space: nowrap;
 }
+
+@mixin abs-stretch {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+}

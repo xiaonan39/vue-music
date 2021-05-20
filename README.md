@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 记录
+- font-awesome：为字体图标库 npm install font-awesome --save

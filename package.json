@@ -12,6 +12,7 @@
     "better-scroll": "^2.0.5",
     "core-js": "^2.6.5",
     "element-ui": "^2.14.0",
+    "font-awesome": "^4.7.0",
     "good-storage": "^1.1.1",
     "imagvue": "0.0.5",
     "lodash-es": "^4.17.15",
@@ -49,14 +50,37 @@
       "eslint:recommended"
     ],
     "rules": {
-      "space-before-function-paren": [0, "always"],
+      "space-before-function-paren": [
+        0,
+        "always"
+      ],
       "no-debugger": 1,
-      "indent": ["error", 2, {"SwitchCase": 1}],
-      "quotes": ["error", "double"],
-      "brace-style": ["error", "stroustrup"],
-      "array-bracket-spacing": ["error", "never"],
-      "semi": ["error", "always"],
-      "no-console": ["off"]
+      "indent": [
+        "error",
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "brace-style": [
+        "error",
+        "stroustrup"
+      ],
+      "array-bracket-spacing": [
+        "error",
+        "never"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-console": [
+        "off"
+      ]
     },
     "parserOptions": {
       "parser": "babel-eslint"

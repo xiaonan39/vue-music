@@ -71,7 +71,7 @@ export default {
         margin-top: 10px;
       }
       >:last-child{
-        color: $font_color;
+        color: $font_color_black;
       }
       .newMv_name{
         @include text-ellipsis;//单行显示，多行…

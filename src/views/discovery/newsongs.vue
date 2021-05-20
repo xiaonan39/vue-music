@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import { getNewSongs } from '@/api';
+import { getNewSongs } from "@/api";
 import {mapActions,mapMutations} from "@/store/helper/music";
-import { createSong } from "@/utils"
+import { createSong } from "@/utils";
 export default {
   props: {
     title:{type:String,default:"音乐"}
@@ -38,10 +38,9 @@ export default {
     return {
       // column:Math.ceil(songsLimit / 2),
       songData: [],
-      songLength: ''
+      songLength: ""
     };
   },
-
   components: {},
 
   computed: {
@@ -52,7 +51,7 @@ export default {
       ];
     },
     normalizedSongs() {
-      return this.songData.map(song => this.nomalizeSong(song))
+      return this.songData.map(song => this.nomalizeSong(song));
     }
   },
   methods: {
@@ -73,11 +72,11 @@ export default {
     },
     nomalizeSong(song) {//从utils中获取了些逻辑
       const {id,name,
-      song:{mvid,artists,album:{blurPicUrl},duration}} = song;
+        song:{mvid,artists,album:{blurPicUrl},duration}} = song;
       return createSong({id,name,img:blurPicUrl,artists,duration,mvId:mvid});
     },
     ...mapMutations(["setPlaylist"]),
-    ...mapActions(['startSong'])
+    ...mapActions(["startSong"])
     /* startSong() {//用此方法会找不到actions中的startSong函数，貌似是因为命名空间的原因
       console.log("===============");
       this.$store.dispatch("startSong");

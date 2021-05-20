@@ -12,6 +12,7 @@ import "@/style/index.scss";
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'; //切记引用此文件，否则icon不生效
+import 'font-awesome/css/font-awesome.min.css';//记得在class中添加‘fa’,否则字体不生效
 /* import VueI18n from 'vue-i18n';
 import enLocale from 'element-ui/lib/locale/lang/en';
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN';
