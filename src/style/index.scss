@@ -51,7 +51,7 @@ html,body{
   }
   #nav>:nth-child(3){
     // width:100%;
-    height:70px;
+    height:$footer-height;
     // flex-grow: 0;
     background: $background_hui;
     opacity: $opacity;

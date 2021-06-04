@@ -19,6 +19,7 @@
       <el-container>
         <MiniPlayer/>
       </el-container>
+      <Player/>
     </div>
   </div>
 </template>
@@ -26,13 +27,14 @@
 import Menu from "./components/menu";
 import Header from "./views/header";
 import MiniPlayer from "@/components/mini-player";
+import Player from "@/components/player";
 export default {
   metaInfo () {
     return{
       title:"cheng-music"
     }
   },
-  components:{Menu,Header,MiniPlayer},
+  components:{Menu,Header,MiniPlayer,Player},
 
 }
 </script>

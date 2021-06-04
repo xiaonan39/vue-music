@@ -6,8 +6,10 @@
       <template v-if="hasCurrentSong">
         <!-- 别的地方点击了歌曲后该部分就会显示出来 -->
         <div @click="togglePlayerShow" class="img_wrap">
-          <!-- 蒙层，现未用。网易云本身貌似也没用 -->
-          <!-- <div class="mask"></div> -->
+          <!-- 网易云本身貌似也没用 -->
+          <div class="mask">
+            <i :class="['fa','fad',switchHeadPortrait ? 'fa-angle-double-down':'fa-angle-double-up']"></i>
+          </div>
           <!-- v-lazy懒加载插件0520并未下载 -->
           <img :src="$utils.genImgUrl(currentSong.img,80)" />
         </div>
@@ -18,8 +20,10 @@
             <span>{{currentSong.artistsText}}</span>
           </p>
           <p>
+            <!-- 歌曲计时,播放进度改变时会更改此 -->
             <span>{{$utils.formatTime(currentTime)}}</span>
             <span>/</span>
+            <!-- 是歌曲总时间 -->
             <span>{{$utils.formatTime(currentSong.duration / 1000)}}</span>
           </p>
         </div>
@@ -46,10 +50,11 @@
     </div>
     <div class="mini_progress"></div>
 
-    <!-- 下方的是进度条, 当浏览器能够开始播放指定的音频/视频时，发生 canplay 事件-->
+    <!-- 下方的是进度条, 当浏览器能够开始播放指定的音频/视频时，发生 canplay事件；timeupdate当播放位置发生变化时触发（应该是手动改变进度的时候）-->
     <audio ref="audio"
       :src="currentSong.url"
       @canplay="startSong"
+      @timeupdate="updateTime"
       ></audio>
   </div>
 </template>
@@ -75,7 +80,10 @@ export default {
     flagControl() {
       return this.playing ? true : false;
     },
-    
+    // 控制歌词详情页的显示与否
+    switchHeadPortrait() {
+      return this.isPlayerShow;
+    },
     ...mapState([
       "currentSong",
       "currentTime",
@@ -149,6 +157,11 @@ export default {
     pause() {//暂停
       this.audio.pause();
     },
+    // 更改播放位置时触发
+    updateTime(e) {
+      const time = e.target.currentTime;
+      this.setCurrentTime(time);//在mapMo
+    },
     ...mapMutations(["setPlayerShow","setCurrentTime","setPlayingState","setPlayMode","setPlaylistShow"])
   },
   mounted () {
@@ -184,7 +197,11 @@ export default {
       height: 100%;
       .mask {
         @include abs-stretch;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(255, 255, 255, 0.5);
+        font-size:$icon-xxxxl ;
+        color:$font_color_write;
+        text-align: center;
+        line-height: 42px;
       }
       img {
         height: 100%;

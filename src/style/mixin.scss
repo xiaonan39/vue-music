@@ -16,10 +16,22 @@
   white-space: nowrap;
 }
 
-@mixin abs-stretch {
+@mixin abs-stretch { //相对定位，满屏
   position: absolute;
   left: 0;
   bottom: 0;
   top: 0;
   right: 0;
+}
+
+// 图像的外边框
+@mixin img-wrap($width, $height: $width) {
+  width: $width;
+  height: $height;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }

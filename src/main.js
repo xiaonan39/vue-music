@@ -6,7 +6,7 @@ import '@/utils/axios';
 import '@/utils/rem.js';
 import Meta from 'vue-meta';
 import * as utils from './utils';
-
+import global from "@/utils/global" 
 
 import "@/style/index.scss";
 
@@ -27,6 +27,7 @@ messages: {
 Vue.use(ElementUI);
 Vue.use(router);
 Vue.use(Meta);
+Vue.use(global);
 
 Vue.prototype.$utils = utils;
 Vue.config.productionTip = false;

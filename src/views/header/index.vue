@@ -7,7 +7,14 @@
           <i class="el-icon-remove"></i>
           <i class="el-icon-d-caret"></i>
         </div>
-        <div class="header_router">
+
+        <!-- 可以控制歌曲详情页的显示 -->
+        <div class="fold_player" @click="foldPlayer"
+          v-if="isPlayerShow">
+          <i class="el-icon-arrow-down"></i>
+        </div>
+        <div class="header_router"
+          v-show="!isPlayerShow">
           <span >
             <i class="el-icon-arrow-left color-green"></i>
           </span>
@@ -23,6 +30,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "@/store/helper/music"; 
 export default {
   name:"top",
   prop:{},
@@ -33,10 +41,15 @@ export default {
 
   components: {},
 
-  computed: {},
-
-
-  methods: {},
+  computed: {
+    ...mapState(["isPlayerShow"])
+  },
+  methods: {
+    ...mapMutations(["setPlayerShow"]),
+    foldPlayer() {
+      this.setPlayerShow(false);
+    },
+  },
   mounted () {},
   created () {}
 }
@@ -44,8 +57,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/style/index.scss";
-
-
 
 .top{
   height:100%;
@@ -65,6 +76,9 @@ export default {
   display: flex;
   width: 12%;
   justify-content:space-between
+}
+.fold_player {
+  font-size: $icon-xl !important;
 }
 .header_button{
   display: flex;
