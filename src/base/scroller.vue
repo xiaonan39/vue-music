@@ -8,8 +8,17 @@
 <script>
 import BScroll from "@better-scroll/core";
 import ScrollBar from "@better-scroll/scroll-bar";//是否开启滚动条：fade为true表示当滚动停止的时候滚动条是否需要渐隐，interactive 表示滚动条是否可以交互。
-import MouseWheel from "@better-scroll/mouse-wheel";//开启鼠标滚轮，上方两者皆需单独下载。但0604尚未下载，却能引用BScroll?
+import MouseWheel from "@better-scroll/mouse-wheel";//开启鼠标滚轮，上方两者皆需单独下载。但0604尚未下载，却能引用BScroll?  两者皆需被use
+BScroll.use(MouseWheel);
+BScroll.use(ScrollBar);
 
+
+const defaultOptions = {
+  mouseWheel: true,
+  scrollY: true,
+  scrollbar: true,
+  probeType: 3
+}
 export default {
   name: "Scroller",
   props: {
@@ -29,7 +38,6 @@ export default {
       handler() {
         this.$nextTick(() => {
           if(!this.scroller) {
-            console.log(new BScroll());
             this.scroller = new BScroll(
               this.$refs.scroller,
               Object.assign({},defaultOptions,this.options)

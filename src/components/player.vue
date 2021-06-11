@@ -29,27 +29,35 @@
             </dl>
           </div>
           <div v-if="nolyric">还没有歌词哦~</div>
-          <Scroller class="song_lyric"
+          <Scroller 
+            class="song_lyric"
             v-else
             :data="lyric"
             :options="{disableTouch: true}"
-            >
-            <div
-              :class="activeClass(index)"
-              class="song_lyric_item"
-              ref="lyric"
-              v-for="(item,index) in lyricWithTranslation"
-              :key="index">
-              <p
-                v-for="(content,contentIndex) in item.contents"
-                :key="contentIndex"
-                class="lyric_text">
-                {{content}}
-              </p>
+            ref="scroller"
+          >
+          <!-- 子元素中需要包一个div，否则会报：The wrapper need at least one child element to be content element to scroll -->
+            <div>
+              <!-- 不写activeClass的话歌词是全部出现在一块的 -->
+              <div
+                :class="activeClass(index)"
+                class="song_lyric_item"
+                ref="lyric"
+                v-for="(item,index) in lyricWithTranslation"
+                :key="index"
+              >
+                <p
+                  v-for="(content,contentIndex) in item.contents"
+                  :key="contentIndex"
+                  class="lyric_text">
+                  {{content}}
+                </p>
+              </div>
             </div>
           </Scroller>
         </div>
       </div>
+      <!-- 下方的是评论 -->
       <div class="player_bottom">
 
       </div>
@@ -60,7 +68,9 @@
 <script>
 /* scroll.vue在global中全局注册了 */
 import { getLyric, getSimiSongs, getSimiPlaylists } from "@/api";
-import { mapState, mapMutations, mapActions, mapGetters } from "@/store/helper/music"
+import { mapState, mapMutations, mapActions, mapGetters } from "@/store/helper/music";
+import {isDef } from "@/utils";
+import lyricParser from "@/utils/lrcParse";
 export default {
   data() {
     return {
@@ -77,8 +87,43 @@ export default {
   computed: {
     ...mapGetters(["hasCurrentSong"]),
     ...mapState(["currentSong", "currentTime", "playing", "isPlayerShow"]),
+    // 歌词内容吧？
     lyricWithTranslation() {
-
+      let arr = [];
+      // 空内容去除,this.lyric为包含众多对象的一个数组，每个子对象中有两个字段：content和time;
+      const lyricFilter = this.lyric.filter(({content}) =>  Boolean(content));
+      console.log(lyricFilter);
+      if(lyricFilter.length) {//正常是总的这个
+        lyricFilter.forEach(lyr => {
+          const {time,content} = lyr;
+          const lyricItem = {time,content,contents:[content]};
+          const sameTimeLyric = this.tlyric.find(({time:tLyricTime}) => {
+            tLyricTime === time;
+          });
+          console.log(sameTimeLyric);
+          // 如果存在时间一样的
+          if(sameTimeLyric) {
+            const {content:tLyricContent} = sameTimeLyric;
+            if(content) {
+              lyricItem.contents.push(tLyricContent);
+            }
+          }
+          arr.push(lyricItem);
+        });
+      }
+      else {
+        arr = lyricFilter.map(({time,content}) => 
+          ({time,content,contents:[content]})
+        );
+      }
+      console.log(arr);
+      return arr;
+    },
+    activeLyricIndex() {
+      return this.lyricWithTranslation ? this.lyricWithTranslation.findIndex((l,index) => {
+        const nextLyric = this.lyricWithTranslation[index +1];
+        return (this.currentTime >= l.time && (nextLyric ? this.currentTime < nextLyric.time : true));
+      }) : -1;
     }
   },
   watch: {
@@ -87,8 +132,21 @@ export default {
         // return true
       }
     },
-    currentSong() {
-      console.log(this.currentSong);
+    currentSong(newSong,oldSong) {
+      if(!newSong.id) {
+        this.setPlayerShow(false);
+        return;
+      }
+      if(newSong.id === oldSong.id) {
+        return;
+      }
+      // 如果歌曲详情显示状态切歌，需要拉取歌曲相关信息
+      if(this.isPlayerShow) {
+        this.updateSong();
+      }
+      else {//否则只更新歌词
+        this.updateLyric();
+      }
     }
   },
   methods: {
@@ -100,7 +158,6 @@ export default {
       const result = await getLyric(this.currentSong.id);
       this.nolyric = !isDef(result.lrc) || !result.lrc.lyric;
       if(!this.nolyric) {
-        console.log(result);
         const {lyric, tlyric} = lyricParser(result);
         this.lyric = lyric;
         this.tlyric = tlyric;
@@ -108,7 +165,11 @@ export default {
     },
     onInitScroller(scroll) {
 
-    }
+    },
+    activeClass(index) {
+      return this.activeLyricIndex === index ? "active" : "";
+    },
+    ...mapMutations(["setPlayerShow"])
   },
   mounted() {
     console.log(this.currentSong);
@@ -240,15 +301,38 @@ $img_outer_border: 320px;
             margin-bottom: 16px;
             >:nth-child(2) {
               border: 1px solid red;
-              padding:3px 2px;
+              // padding:3px 2px;
               margin-left:10px;
+              line-height: 26px;
             }
             
           }
         }
 
+/* linear-gradient() 函数用于创建一个表示两种或多种颜色线性渐变的图片。创建一个线性渐变，需要指定两种颜色，还可以实现不同方向（指定为一个角度）的渐变效果，如果不指定方向，默认从上到下渐变。 
+hsla() 函数使用色相、饱和度、亮度、透明度来定义颜色。
+HSLA 即色相、饱和度、亮度、透明度（英语：Hue, Saturation, Lightness, Alpha ）。1、色相（H）是色彩的基本属性，就是平常所说的颜色名称，如红色、黄色等。2、饱和度（S）是指色彩的纯度，越高色彩越纯，低则逐渐变灰，取 0-100% 的数值。3、亮度（L） 取 0-100%，增加亮度，颜色会向白色变化；减少亮度，颜色会向黑色变化。4、透明度（A） 取值 0~1 之间， 代表透明度。*/
         .song_lyric {
+          width:380px;
+          height: 350px;
+          background: linear-gradient(180deg,
+          hsla(0, 0%, 100%, 0) 0,
+          hsla(0, 0%, 100%, 0.6) 15%,
+          #fff 25%,
+          #fff 75%,
+          hsla(0, 0%, 100%, 0.6) 85%,
+          hsla(0, 0%, 100%, 0)
+          );
+          .song_lyric_item {
+            margin-bottom: 16px;
+            font-size: $icon-m;
 
+            &.avtive {
+              font-size: $icon-l;
+              color: $font_color_black;
+              font-weight: 600;
+            }
+          }
         }
       }
     }

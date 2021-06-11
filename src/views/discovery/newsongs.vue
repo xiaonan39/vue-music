@@ -61,8 +61,6 @@ export default {
     clickSong (item,index) {//两个参数应该是列的下标及在列中的下标()
       const nomalizedSongIndex = this.getSongOrder(item, index) - 1;
       const nomalizedSong = this.normalizedSongs[nomalizedSongIndex];
-      console.log(nomalizedSong);
-      console.log(this.normalizedSongs);
       this.startSong(nomalizedSong);
       this.setPlaylist(this.normalizedSongs);
     },
