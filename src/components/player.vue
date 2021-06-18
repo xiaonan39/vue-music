@@ -35,6 +35,7 @@
             :data="lyric"
             :options="{disableTouch: true}"
             ref="scroller"
+            @init="initScroller"
           >
           <!-- 子元素中需要包一个div，否则会报：The wrapper need at least one child element to be content element to scroll -->
             <div>
@@ -71,12 +72,17 @@ import { getLyric, getSimiSongs, getSimiPlaylists } from "@/api";
 import { mapState, mapMutations, mapActions, mapGetters } from "@/store/helper/music";
 import {isDef } from "@/utils";
 import lyricParser from "@/utils/lrcParse";
+
+const WHEEL_TYPE = "wheel";
+const SCROLL_TYPE = "scroll";
+const AUTO_SCROLL_RECOVER_TIME = 1000;
+
 export default {
   data() {
     return {
       lyric:[],
       nolyric: false
-    }
+    };
   },
   props: {
 
@@ -92,7 +98,6 @@ export default {
       let arr = [];
       // 空内容去除,this.lyric为包含众多对象的一个数组，每个子对象中有两个字段：content和time;
       const lyricFilter = this.lyric.filter(({content}) =>  Boolean(content));
-      console.log(lyricFilter);
       if(lyricFilter.length) {//正常是总的这个
         lyricFilter.forEach(lyr => {
           const {time,content} = lyr;
@@ -100,7 +105,6 @@ export default {
           const sameTimeLyric = this.tlyric.find(({time:tLyricTime}) => {
             tLyricTime === time;
           });
-          console.log(sameTimeLyric);
           // 如果存在时间一样的
           if(sameTimeLyric) {
             const {content:tLyricContent} = sameTimeLyric;
@@ -116,13 +120,14 @@ export default {
           ({time,content,contents:[content]})
         );
       }
-      console.log(arr);
       return arr;
     },
+    // 每行歌词的下标
     activeLyricIndex() {
-      return this.lyricWithTranslation ? this.lyricWithTranslation.findIndex((l,index) => {
+      console.log(this.lyricWithTranslation);
+      return this.lyricWithTranslation ? this.lyricWithTranslation.findIndex((item,index) => {
         const nextLyric = this.lyricWithTranslation[index +1];
-        return (this.currentTime >= l.time && (nextLyric ? this.currentTime < nextLyric.time : true));
+        return (this.currentTime >= item.time && (nextLyric ? this.currentTime < nextLyric.time : true));
       }) : -1;
     }
   },
@@ -163,10 +168,32 @@ export default {
         this.tlyric = tlyric;
       }
     },
-    onInitScroller(scroll) {
-
+    initScroller(scroll) {//歌词滚动
+      const scrollStart = type => {
+        this.clearTimer(type);
+        this.lyricScrolling[type] = true;
+      };
+      const scrollEnd = type => {
+        /* 说的是滚动结束后两秒，歌词开始自动滚动
+        之前每行歌词中的time属性值赋值错误，导致歌词初始化时字体加粗错误 */
+        this.clearTimer(type);
+        this.lyricTimer[type] = setTimeout(() => {
+          this.lyricScrolling[type] = false;
+        },AUTO_SCROLL_RECOVER_TIME);
+      };
+      /* mousewheelStart/mousewheelMove/mousewheelEnd都是BetterScroll中的事件，scrollStart倒没找到*/
+      scroll.on("scrollStart",scrollStart.bind(null,SCROLL_TYPE));
+      scroll.on("mousewheelStart",scrollStart.bind(null,WHEEL_TYPE));
+      scroll.on("scrollEnd",scrollEnd.bind(null,SCROLL_TYPE));
+      scroll.on("mousewheelEnd",scrollEnd.bind(null,WHEEL_TYPE));
     },
+    clearTimer(type) {
+      this.lyricTimer[type] && clearTimeout(this.lyricTimer[type]);
+    },
+
     activeClass(index) {
+      console.log(index);
+      console.log(this.activeLyricIndex);
       return this.activeLyricIndex === index ? "active" : "";
     },
     ...mapMutations(["setPlayerShow"])
@@ -175,10 +202,17 @@ export default {
     console.log(this.currentSong);
   },
   created() {
-
+    this.lyricScrolling = {
+      [WHEEL_TYPE]: false,
+      [SCROLL_TYPE]: false
+    };
+    this.lyricTimer = {
+      [WHEEL_TYPE]: null,
+      [SCROLL_TYPE]: null
+    };
   }
 
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -309,13 +343,15 @@ $img_outer_border: 320px;
           }
         }
 
-/* linear-gradient() 函数用于创建一个表示两种或多种颜色线性渐变的图片。创建一个线性渐变，需要指定两种颜色，还可以实现不同方向（指定为一个角度）的渐变效果，如果不指定方向，默认从上到下渐变。 
+/*mask-image CSS属性用于设置元素上遮罩层的图像。 
+linear-gradient() 函数用于创建一个表示两种或多种颜色线性渐变的图片。创建一个线性渐变，需要指定两种颜色，还可以实现不同方向（指定为一个角度）的渐变效果，如果不指定方向，默认从上到下渐变。 
 hsla() 函数使用色相、饱和度、亮度、透明度来定义颜色。
 HSLA 即色相、饱和度、亮度、透明度（英语：Hue, Saturation, Lightness, Alpha ）。1、色相（H）是色彩的基本属性，就是平常所说的颜色名称，如红色、黄色等。2、饱和度（S）是指色彩的纯度，越高色彩越纯，低则逐渐变灰，取 0-100% 的数值。3、亮度（L） 取 0-100%，增加亮度，颜色会向白色变化；减少亮度，颜色会向黑色变化。4、透明度（A） 取值 0~1 之间， 代表透明度。*/
         .song_lyric {
           width:380px;
           height: 350px;
-          background: linear-gradient(180deg,
+          // 切记linear-gradient是mask-image中的值，而非background
+          mask-image: linear-gradient(180deg,
           hsla(0, 0%, 100%, 0) 0,
           hsla(0, 0%, 100%, 0.6) 15%,
           #fff 25%,
@@ -325,12 +361,15 @@ HSLA 即色相、饱和度、亮度、透明度（英语：Hue, Saturation, Ligh
           );
           .song_lyric_item {
             margin-bottom: 16px;
-            font-size: $icon-m;
+            font-size: $font-xxs;
 
-            &.avtive {
-              font-size: $icon-l;
+            &.active {
+              font-size: $font-l;
               color: $font_color_black;
-              font-weight: 600;
+              font-weight: 700;
+            }
+            .lyric_text {
+              margin-bottom: 8px;
             }
           }
         }
