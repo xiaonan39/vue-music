@@ -86,74 +86,85 @@ export function shallowEqual(a, b, compareKey) {
 }
 
 export function notify(message, type) {
-    const params = {
-        message,
-        duration: 1500
-    };
-    const fn = type ? Notification[type] : Notification;
-    return fn(params);
+  const params = {
+    message,
+    duration: 1500
+  };
+  const fn = type ? Notification[type] : Notification;
+  return fn(params);
 }
 ["success", "warning", "info", "error"].forEach(key => {
-    notify[key] = message => {
-        return notify(message, key);
-    };
+  notify[key] = message => {
+    return notify(message, key);
+  };
 });
 
 export function requestFullScreen(element) {
-    const docElm = element;
-    if (docElm.requestFullscreen) {
-        docElm.requestFullscreen();
-    }
-    else if (docElm.msRequestFullscreen) {
-        docElm.msRequestFullscreen();
-    }
-    else if (docElm.mozRequestFullScreen) {
-        docElm.mozRequestFullScreen();
-    }
-    else if (docElm.webkitRequestFullScreen) {
-        docElm.webkitRequestFullScreen();
-    }
+  const docElm = element;
+  if (docElm.requestFullscreen) {
+    docElm.requestFullscreen();
+  }
+  else if (docElm.msRequestFullscreen) {
+    docElm.msRequestFullscreen();
+  }
+  else if (docElm.mozRequestFullScreen) {
+    docElm.mozRequestFullScreen();
+  }
+  else if (docElm.webkitRequestFullScreen) {
+    docElm.webkitRequestFullScreen();
+  }
 }
 
 export function exitFullscreen() {
-    const de = window.parent.document;
+  const de = window.parent.document;
 
-    if (de.exitFullscreen) {
-        de.exitFullscreen();
-    }
-    else if (de.mozCancelFullScreen) {
-        de.mozCancelFullScreen();
-    }
-    else if (de.webkitCancelFullScreen) {
-        de.webkitCancelFullScreen();
-    }
-    else if (de.msExitFullscreen) {
-        de.msExitFullscreen();
-    }
+  if (de.exitFullscreen) {
+    de.exitFullscreen();
+  }
+  else if (de.mozCancelFullScreen) {
+    de.mozCancelFullScreen();
+  }
+  else if (de.webkitCancelFullScreen) {
+    de.webkitCancelFullScreen();
+  }
+  else if (de.msExitFullscreen) {
+    de.msExitFullscreen();
+  }
 }
 
 export function isFullscreen() {
-    return document.fullScreen ||
-        document.mozFullScreen ||
-        document.webkitIsFullScreen;
+  return document.fullScreen ||
+      document.mozFullScreen ||
+      document.webkitIsFullScreen;
 }
 
 export function isUndef(v) {
-    return v === undefined || v === null;
+  return v === undefined || v === null;
 }
 
 export function isDef(v) {
-    return v !== undefined && v !== null;
+  return v !== undefined && v !== null;
 }
 
 export function isTrue(v) {
-    return v === true;
+  return v === true;
 }
 
 export function isFalse(v) {
-    return v === false;
+  return v === false;
 }
 
 export function getPageOffset(page, limit) {
-    return (page - 1) * limit;
+  return (page - 1) * limit;
+}
+
+/* ellipsis是自己在utils中添加的，若长度超过一定字符，超过的部分显示为“…”。css中可直接使用text-overflow: ellipsis来控制单行(要设置width)；多行：display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical; */
+export function ellipsis(value, maxPreviewLength) {
+  if(!value) return;
+  if(value.length < maxPreviewLength) return value;
+  else {
+    return value.slice(0,maxPreviewLength)+"...";
+  }
 }

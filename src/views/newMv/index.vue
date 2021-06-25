@@ -1,11 +1,10 @@
-<!--  mv详情页-->
+<!-- 最新mv页面，一级导航 -->
 <template>
-  <div>mv</div>
+  <div>最新mv</div>
 </template>
 
 <script>
 export default {
-  name: "mv",
   data () {
     return {
     };
@@ -15,12 +14,14 @@ export default {
 
   computed: {},
 
+  methods: {},
+
   mounted () {},
 
-  methods: {}
+  created () {}
+
 };
 
 </script>
 <style lang='scss' scoped>
-@import "@/style/index.scss";
 </style>

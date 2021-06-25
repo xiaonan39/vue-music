@@ -22,4 +22,4 @@ export default {
   playHistory:storage.get(PLAY_HISTORY_KEY,[]),
   // 菜单显示
   isMenuShow:true,
-}
+};

@@ -12,8 +12,9 @@
             :to="item.path"
             tag="li"
             class="menu_item"
+            active-class="menu_item_active"
           >
-            <span>{{item.meta.title}}</span>
+            <span class="item_title">{{item.meta.title}}</span>
           </router-link>
         </ul>
       </div>
@@ -44,7 +45,7 @@ export default {
     menuList () {
       return this.isLogin && this.userMenus.length
         ? this.menus.concat(this.userMenus)
-        : this.menus
+        : this.menus;
     },
     ...mapUserState(["userPlaylist"]),
     ...mapUserGetters(["isLogin", "userMenus"])
@@ -58,11 +59,17 @@ export default {
 <style lang="scss" scoped>
 @import "@/style/index.scss";
 .menu {
-  font-size: $icon-xl;
+  // width: 250px;
+  font-size: $icon-l;
   overflow: auto;
   .menu_wrap {
     overflow: hidden;
     // overflow-y: auto;
+    .menu_title {
+      padding: 12px 18px 12px 35px;
+      font-size: $icon-m;
+      color: $font_color_grey2;
+    }
     .menu_list {
       .menu_item {
         padding: 12px 18px 12px 35px;
@@ -71,9 +78,14 @@ export default {
           background: $menu_item_hover_bg;
           color: $color_red;
         }
-        &:active {
+        &-active {
           //是选中时的状态
+          color: $color_red;
           background: $menu_item_active_bg;
+        }
+        .item_title {
+          font-size: $font-xs;
+          @include text-ellipsis;
         }
       }
     }

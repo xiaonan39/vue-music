@@ -1,3 +1,5 @@
+$theme_color:#B3C0D1;
+
 $error_color:red;
 $success_color:green;
 
@@ -8,11 +10,12 @@ $color_yellow:yellow;
 $font_color_black:#333;
 $font_color_write:#fff;
 $font_color_grey: #ccc;
+$font_color_grey2: #909090;
 
 $background_write:#fff;
 $background_black:#333;
 $background_red:red;
-$background_hui: #B3C0D1;
+$background_hui: #B3C0D1;  //算主题色不，theme。目前只有底部的播放器有用
 $background_qian:rgb(246, 246, 246);
 
 $menu_item_hover_bg:#e7e7e7;
@@ -28,4 +31,5 @@ $player_detail_content_back:#ffffff;
 
 @function opacity($num){
     @return $num 
-}
+};
+

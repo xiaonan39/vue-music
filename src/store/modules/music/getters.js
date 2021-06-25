@@ -3,14 +3,14 @@ import {isDef,playModeMap} from "@/utils";
 export const currentIndex = (state) => {
   const {currentSong,playlist} = state;
   return playlist.findIndex(({id}) => id === currentSong.id);
-}
+};
 export const nextSong = (state,getters) => {
   const {playlist,playMode} = state;
   const nextStratMap = {
     [playModeMap.sequence.code]:getSequenceNextIndex,
     [playModeMap.loop.code]:getLoopNextIndex,
     [playModeMap.random.code]:getRandomNextIndex
-  }
+  };
   const getNextStrat = nextStratMap[playMode];
   const index = getNextStrat();
   return playlist[index];
@@ -21,7 +21,7 @@ export const nextSong = (state,getters) => {
     if(nextIndex > playlist.length - 1) {
       nextIndex = 0;
     }
-    return nextIndex
+    return nextIndex;
   }
 
   // 随机
@@ -33,7 +33,7 @@ export const nextSong = (state,getters) => {
   function getLoopNextIndex() {
     return getters.currentIndex;
   }
-}
+};
 
 // 上一首歌
 export const prevSong = (state,getters) => {
@@ -42,7 +42,7 @@ export const prevSong = (state,getters) => {
     [playModeMap.sequence.code]:genSequencePrevIndex,
     [playModeMap.loop.code]:getLoopPrevIndex,
     [playModeMap.random.code]:getRandomPrevIndex
-  }
+  };
   const getPrevStrat = prevStratMap[playMode];
   const index = getPrevStrat();
   return playlist[index];
@@ -61,20 +61,20 @@ export const prevSong = (state,getters) => {
   function getRandomPrevIndex() {
     return getRandomIndex(playlist,getters.currentIndex);
   }
-}
+};
 // 当前是否有歌曲在播放
 export const hasCurrentSong = (state) =>{
   return isDef(state.currentSong.id);
-}
+};
 
-  function getRandomIndex(playlist,currentIndex) {
-    // 防止无限循环
-    if(playlist.length === 1) {
-      return currentIndex;
-    }
-    let index = Math.round(Math.random() * (playlist.length-1));
-    if(index === currentIndex) {
-      index = getRandomIndex(playlist,currentIndex);
-    }
-    return index;
+function getRandomIndex(playlist,currentIndex) {
+  // 防止无限循环
+  if(playlist.length === 1) {
+    return currentIndex;
   }
+  let index = Math.round(Math.random() * (playlist.length-1));
+  if(index === currentIndex) {
+    index = getRandomIndex(playlist,currentIndex);
+  }
+  return index;
+}

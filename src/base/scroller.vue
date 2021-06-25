@@ -18,7 +18,7 @@ const defaultOptions = {
   scrollY: true,
   scrollbar: true,
   probeType: 3
-}
+};
 export default {
   name: "Scroller",
   props: {
@@ -42,17 +42,17 @@ export default {
               this.$refs.scroller,
               Object.assign({},defaultOptions,this.options)
             );
-          this.$emit("init", this.scroller);
+            this.$emit("init", this.scroller);
           }
           else {
             this.scroller && this.scroller.refresh();
           }
-        })
+        });
       },
       immediate: true
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

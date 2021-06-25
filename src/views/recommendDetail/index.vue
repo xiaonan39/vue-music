@@ -1,4 +1,4 @@
-<!-- 歌单详情页面，有图片有表格，是原作者的playlist-detail -->
+<!-- 二级导航吧--歌单详情页面，有图片有表格，是原作者的playlist-detail -->
 <template>
   <div  class="recomm" v-if="recomm.id">
     <DetailHeader ref="detailHeader" :recomm="recomm" :songs="songs" />
@@ -11,7 +11,7 @@ import {getListDetail} from "@/api";//获取详情的接口
 export default {
   metaInfo(){
     console.log(this.recomm);
-    return {title:this.recomm.name}
+    return {title:this.recomm.name};
   },
   data () {
     return {
@@ -49,7 +49,7 @@ export default {
   },
   created () {}
 
-}
+};
 
 </script>
 <style lang='scss' scoped>

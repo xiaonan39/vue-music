@@ -1,6 +1,6 @@
 export default {
-    setAxiosLoading(state, loading) {
-      state.axiosLoading = loading
-    },
-  }
+  setAxiosLoading(state, loading) {
+    state.axiosLoading = loading;
+  },
+};
   

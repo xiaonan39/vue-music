@@ -16,12 +16,38 @@
   white-space: nowrap;
 }
 
+@mixin many-ellipsis($num) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $num;
+  -webkit-box-orient: vertical;
+}
+
+@mixin colorWriteRgba($num: 0.5) {
+  background: rgba(255, 255, 255, $num);
+}
+
 @mixin abs-stretch { //相对定位，满屏
   position: absolute;
   left: 0;
   bottom: 0;
   top: 0;
   right: 0;
+}
+
+@mixin flex_center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin abs_center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 // 图像的外边框

@@ -24,7 +24,8 @@ export function parseLyric(lrc) {
       const t = timeRegExpArr[k];
       const min = Number(String(t.match(/\[\d*/i)).slice(1));
       const sec = Number(String(t.match(/:\d*/i)).slice(1));
-      const time = min * 60 * sec;
+      // 漂亮，下方的加号之前误写为*，导致歌词中的时间不对，致使字体加粗定位在了错误的地方
+      const time = min * 60 + sec;
       if(content !== "") {
         lrcObj.push({time:time, content});
       }

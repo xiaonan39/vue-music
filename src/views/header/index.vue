@@ -52,7 +52,7 @@ export default {
   },
   mounted () {},
   created () {}
-}
+};
 
 </script>
 <style lang="scss" scoped>

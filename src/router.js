@@ -7,11 +7,11 @@ import Recommended from "./views/recommended/index";
 import Discovery from "./views/discovery"; */
 
 // 下方的写法显示出来的是函数？
-const Discovery = () =>import('@/views/discovery');
-const Mv = () =>import('@/views/mv');
-const Music = () => import('@/views/music');
-const Recommended = () => import('@/views/recommended');
-const RecommendDetail = () =>import('@/views/recommendDetail');
+const Discovery = () =>import("@/views/discovery");
+const newMv = () =>import("@/views/newMv");
+const Music = () => import("@/views/music");
+const Recommended = () => import("@/views/recommended");
+const RecommendDetail = () =>import("@/views/recommendDetail");
 // import PlaylistDetail from "@/page"
 
 
@@ -33,9 +33,9 @@ export const menuRoutes=[
     // component:'PlaylistDetail',
   }, */
   {
-    path: "/mv",
-    name: "mv",
-    component: Mv,
+    path: "/newMv",
+    name: "newMv",
+    component: newMv,
     meta:{
       title:"最新MV",
       icon:"mv"
@@ -59,7 +59,7 @@ export const menuRoutes=[
       icon:"Music"
     }
   },
-]
+];
 // 此处添加了路由后，下方的routes中就不必再添加了
 Vue.use(Router);
 
@@ -67,13 +67,13 @@ export default new Router({
   mode: "hash",
   routes: [
     {
-      path: '/',
-      redirect: '/discovery',
+      path: "/",
+      redirect: "/discovery",
     },
     {
-      path: "/mv",
-      name: "mv",
-      component: Mv,
+      path: "/newMv",
+      name: "newMv",
+      component: newMv,
     },
     {
       path: "/playlist/:id", //自己写的文件是recommend，但是获取的数据中貌似是playlist,so还是用playlist吧，下方的name和com是不用变的

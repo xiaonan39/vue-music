@@ -4,8 +4,8 @@
 有discover中的最新音乐中会用到createSong
  */
 import { getAlbum, getMvDetail } from "@/api";
-import router from '@/router';
-import { isDef, notify } from './common';
+import router from "@/router";
+import { isDef, notify } from "./common";
 
 export function createSong(song) {
   const { id, name, img, artists, duration, albumId, albumName, mvId, ...rest } = song;
@@ -24,7 +24,7 @@ export function createSong(song) {
     // mv的id,如果有的话会在songTable组件中加上mv链接
     mvId,
     ...rest
-  }
+  };
 }
 
 function genSongPlayUrl(id) {
@@ -32,24 +32,26 @@ function genSongPlayUrl(id) {
 }
 
 export function genArtistisText(artists) {
-  return (artists || []).map(({name}) => name).join('/');
+  return (artists || []).map(({name}) => name).join("/");
 }
 
-export async function getSongImg() {
+export async function getSongImg(id, albumId) {
   if(!isDef(albumId)) { //throw抛出用户自定义异常，抛出的数据会被传递到调用堆栈中的第一个catch模块
-    throw new Error('need albumId');
+    throw new Error("need albumId");
   }
   const { songs } = await getAlbum(albumId);
   const { al:{picUrl}} = songs.find(({id:songId}) => songId === id) || {};
   return picUrl;
 }
 
+/* 跳转mv */
 export async function goMvWithCheck(id) {
   try{
     await getMvDetail(id);
     goMv(id);
-  }catch(error){
-    notify('mv获取失败');
+  }
+  catch(error){
+    notify("mv获取失败");
   }
 }
 

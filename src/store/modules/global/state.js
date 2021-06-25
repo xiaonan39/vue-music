@@ -1,4 +1,4 @@
 export default {
-    axiosLoading: false,
-  }
+  axiosLoading: false,
+};
   

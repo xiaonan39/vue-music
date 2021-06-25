@@ -1,3 +1,3 @@
-import { request } from '@/utils'
+import { request } from "@/utils";
 
-export const getArtists = id => request.get(`/artists?id=${id}`)
+export const getArtists = id => request.get(`/artists?id=${id}`);

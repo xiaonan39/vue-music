@@ -19,7 +19,9 @@
           <div class="song_info">
             <div class="song_info_desc">
               <h2>{{currentSong.name}}</h2>
-              <span>MV</span>
+              <span
+                v-if="currentSong.mvId"
+                @click="goMv">MV</span>
             </div>
             <dl>
               <dt>歌手：</dt>
@@ -70,7 +72,7 @@
 /* scroll.vue在global中全局注册了 */
 import { getLyric, getSimiSongs, getSimiPlaylists } from "@/api";
 import { mapState, mapMutations, mapActions, mapGetters } from "@/store/helper/music";
-import {isDef } from "@/utils";
+import {isDef, goMvWithCheck } from "@/utils";
 import lyricParser from "@/utils/lrcParse";
 
 const WHEEL_TYPE = "wheel";
@@ -103,7 +105,7 @@ export default {
           const {time,content} = lyr;
           const lyricItem = {time,content,contents:[content]};
           const sameTimeLyric = this.tlyric.find(({time:tLyricTime}) => {
-            tLyricTime === time;
+            tLyricTime === lyr;
           });
           // 如果存在时间一样的
           if(sameTimeLyric) {
@@ -124,7 +126,6 @@ export default {
     },
     // 每行歌词的下标
     activeLyricIndex() {
-      console.log(this.lyricWithTranslation);
       return this.lyricWithTranslation ? this.lyricWithTranslation.findIndex((item,index) => {
         const nextLyric = this.lyricWithTranslation[index +1];
         return (this.currentTime >= item.time && (nextLyric ? this.currentTime < nextLyric.time : true));
@@ -192,9 +193,12 @@ export default {
     },
 
     activeClass(index) {
-      console.log(index);
-      console.log(this.activeLyricIndex);
       return this.activeLyricIndex === index ? "active" : "";
+    },
+    // 跳转至mv页面
+    goMv() {
+      this.setPlayerShow(false);
+      goMvWithCheck(this.currentSong.id);
     },
     ...mapMutations(["setPlayerShow"])
   },

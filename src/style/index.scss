@@ -70,7 +70,8 @@ html,body{
     margin: 0;
     display: flex;
     flex-direction: column;
-    width:12%;
+    // 宽度不要写百分比……
+    width:250px;
     background: $background_qian;
     height:calc(100% - #{$header-height}) ;
   }

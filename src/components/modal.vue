@@ -25,10 +25,10 @@ export default {
     width:{type:String,default:"30%"},
   },
   data () {
-      return {
-        dialogVisible: false
-      };
-    },
+    return {
+      dialogVisible: false
+    };
+  },
   computed:{
     data () {
       console.log(this.dialogVisible);
@@ -42,15 +42,15 @@ export default {
     }
   },
   methods: {
-      handleClose(done) {
-        // this.$emit('dialogVisible')
-      }
-    },
+    handleClose() {
+      // this.$emit('dialogVisible')
+    }
+  },
   mounted () {},
   created () {
     console.log("有引用尼玛"+this.dialogVisible);
   }
-}
+};
 
 </script>
 <style lang='scss' scoped>

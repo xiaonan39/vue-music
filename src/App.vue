@@ -32,11 +32,11 @@ export default {
   metaInfo () {
     return{
       title:"cheng-music"
-    }
+    };
   },
   components:{Menu,Header,MiniPlayer,Player},
 
-}
+};
 </script>
 <style lang='scss' scoped>
 

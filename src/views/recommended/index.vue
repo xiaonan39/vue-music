@@ -1,4 +1,4 @@
-<!--  -->
+<!--  推荐歌单页面，一级导航-->
 <template>
   <div>recommended</div>
 </template>
@@ -19,7 +19,7 @@ export default {
   methods: {},
   mounted () {},
 
-}
+};
 
 </script>
 <style lang='scss' scoped>

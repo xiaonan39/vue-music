@@ -50,7 +50,8 @@ export const confirm = function (text, title, onConfirm = () => {}) {
       // 生成dom,因为是extend生成的，而不是我们平时常写的组件实例，所以不可以通过 new Vue({ components: testExtend }) 来直接使用，需要通过 new Profile().$mount('#mount-point') 来挂载到指定的元素上。
       instanceCache.$mount();
       document.body.appendChild(instanceCache.$el);
-    } else {
+    }
+    else {
       // 更新属性
       instanceCache.text = text;
       instanceCache.title = title;

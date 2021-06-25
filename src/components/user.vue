@@ -12,12 +12,13 @@
       <span>{{ user.nickname }}</span>
     </div>
 
-    <!-- 登录框 -->
+    <!-- 登录框 
+    之前自己未写$utils导致登录框宽度在页面宽度变窄时显示过窄，0624按作者的写法后登录框的宽度未跟随页面宽度变窄而变窄-->
     <el-dialog
       :title="title"
       :modal="false"
       :visible.sync="visible"
-      width="20%"
+      :width="$utils.toRem(320)"
       :before-close="handleClose"
     >
       <el-input placeholder="请输入您的网易云id" v-model="uid" />
@@ -49,7 +50,7 @@ import {
   mapState as mapUserState,
   mapGetters as mapUserGetters,
 } from "@/store/helper/user";
-import Chmodal from "./modal";
+// import Chmodal from "./modal";
 import storage from "good-storage";
 import { UID_KEY, isDef } from "@/utils";
 
@@ -65,7 +66,7 @@ export default {
     };
   },
   components: {
-    Chmodal,
+    // Chmodal,
   },
   computed: {
     ...mapUserState(["user"]), //此应该是获取的user的数据

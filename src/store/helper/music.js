@@ -1,3 +1,3 @@
-import { createNamespacedHelpers } from 'vuex'
+import { createNamespacedHelpers } from "vuex";
 
-export const { mapState, mapMutations, mapGetters, mapActions } = createNamespacedHelpers('music')
+export const { mapState, mapMutations, mapGetters, mapActions } = createNamespacedHelpers("music");

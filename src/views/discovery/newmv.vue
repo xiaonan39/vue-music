@@ -1,4 +1,4 @@
-<!--  -->
+<!--  发现音乐页下方的推荐mv-->
 <template>
   <div class="newMv">
     <span>{{ title }}</span>
@@ -6,6 +6,9 @@
       <div class="newMv_list" v-for="(item , index) in mv" :key="index">
         <div class="newMv_Video">
           <img :src="$utils.genImgUrl(item.picUrl,270,160)" />
+          <div class="play-icon-wrap">
+            <PlayIcon :size="48" class="play-icon"/>
+          </div>
         </div>
         <p class="newMv_name">{{ item.name }}</p>
         <p class="newMv_er">{{ item.artistName }}</p>
@@ -63,9 +66,27 @@ export default {
       margin-bottom: 70px;
       // padding: 0 20px 70px;
       .newMv_Video{
+        position: relative;
         img{
           width: 100%;
+          border-radius: 4px;
         }
+
+        .play-icon-wrap {
+          @include abs-stretch;
+
+          &:hover {
+            .play-icon {
+              opacity: 1;
+            }
+          }
+          .play-icon {
+            @include abs_center;
+            opacity: 0;
+            transition: opacity 0.3s;
+          }
+        }
+
       }
       >p{
         margin-top: 10px;
