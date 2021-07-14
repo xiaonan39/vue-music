@@ -1,4 +1,4 @@
-<!--  -->
+<!-- 页面左侧的导航 -->
 <template>
   <div class="menu">
     <user></user>

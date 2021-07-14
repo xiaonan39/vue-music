@@ -20,6 +20,6 @@ export default {
   playlist:[],
   // 播放历史数据
   playHistory:storage.get(PLAY_HISTORY_KEY,[]),
-  // 菜单显示
+  // 菜单显示(有的页面不需要侧边栏)
   isMenuShow:true,
 };

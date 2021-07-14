@@ -8,14 +8,15 @@ import Discovery from "./views/discovery"; */
 
 // 下方的写法显示出来的是函数？
 const Discovery = () =>import("@/views/discovery");
-const newMv = () =>import("@/views/newMv");
+const newMv = () =>import("@/views/newMv");//对应的应该是人家的mvs
 const Music = () => import("@/views/music");
 const Recommended = () => import("@/views/recommended");
 const RecommendDetail = () =>import("@/views/recommendDetail");
 // import PlaylistDetail from "@/page"
+const Mv = () => import("@/views/mv");
 
 
-
+export const layoutCenterNames = ["discovery", "newMv", "recommended", "music"];
 
 export const menuRoutes=[
   {
@@ -71,19 +72,15 @@ export default new Router({
       redirect: "/discovery",
     },
     {
-      path: "/newMv",
-      name: "newMv",
-      component: newMv,
-    },
-    {
       path: "/playlist/:id", //自己写的文件是recommend，但是获取的数据中貌似是playlist,so还是用playlist吧，下方的name和com是不用变的
-      name: "recommended",
+      name: "playlist",
       component: RecommendDetail,
     },
     {
-      path: "/music",
-      name: "music",
-      component: Music,
+      path: "/mv/:id",
+      name: "mv",
+      component: Mv,
+      props: (route) =>  ({id: +route.params.id}),
     },
     ...menuRoutes
   ]

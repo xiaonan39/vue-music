@@ -7,7 +7,7 @@
         <Header></Header>
       </el-container>
       <el-container>
-        <aside>
+        <aside v-show="isMenuShow">
           <Menu></Menu>
         </aside>
         <main>
@@ -28,6 +28,7 @@ import Menu from "./components/menu";
 import Header from "./views/header";
 import MiniPlayer from "@/components/mini-player";
 import Player from "@/components/player";
+import { mapState } from "@/store/helper/music";
 export default {
   metaInfo () {
     return{
@@ -35,6 +36,9 @@ export default {
     };
   },
   components:{Menu,Header,MiniPlayer,Player},
+  computed: {
+    ...mapState(["isMenuShow"]),
+  }
 
 };
 </script>

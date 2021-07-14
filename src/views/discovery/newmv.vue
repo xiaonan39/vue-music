@@ -4,14 +4,16 @@
     <span>{{ title }}</span>
     <div class="newMv_wrap" v-if="mv">
       <div class="newMv_list" v-for="(item , index) in mv" :key="index">
-        <div class="newMv_Video">
+        <div class="newMv_video_wrap" @click="goMv(item)">
+          <div class="newMv_Video">
           <img :src="$utils.genImgUrl(item.picUrl,270,160)" />
           <div class="play-icon-wrap">
             <PlayIcon :size="48" class="play-icon"/>
           </div>
+          </div>
+          <p class="newMv_name">{{ item.name }}</p>
+          <p class="newMv_er">{{ item.artistName }}</p>
         </div>
-        <p class="newMv_name">{{ item.name }}</p>
-        <p class="newMv_er">{{ item.artistName }}</p>
       </div>
     </div>
   </div>
@@ -19,6 +21,7 @@
 
 <script>
 import { getPersonalizedMv } from "@/api";
+import { isDef } from "@/utils";
 export default {
   data () {
     return {
@@ -28,19 +31,21 @@ export default {
   props: {
     title:{type:String,defalut:"mv"}
   },
-  components: {},
-
   computed: {},
-
-  mounted () {},
-
   methods: {
+    // 获取Mv的数据
     async getMv() {
       const { result } = await getPersonalizedMv();
       this.mv = result;
+    },
+    // 点击mv则跳转至相应的mv页面
+    goMv(item) {
+      if(isDef(item.id)) {
+        // 下方的path对应的是router中的mv
+        this.$router.push(`/mv/${item.id}`);
+      }
     }
   },
-
   created () {
     this.getMv();
   }
@@ -65,37 +70,40 @@ export default {
       width: 24%;
       margin-bottom: 70px;
       // padding: 0 20px 70px;
-      .newMv_Video{
-        position: relative;
-        img{
-          width: 100%;
-          border-radius: 4px;
-        }
+      
+      .newMv_video_wrap {
+        .newMv_Video{
+          position: relative;
+          img{
+            width: 100%;
+            border-radius: 4px;
+          }
 
-        .play-icon-wrap {
-          @include abs-stretch;
+          .play-icon-wrap {
+            @include abs-stretch;
 
-          &:hover {
+            &:hover {
+              .play-icon {
+                opacity: 1;
+              }
+            }
             .play-icon {
-              opacity: 1;
+              @include abs_center;
+              opacity: 0;
+              transition: opacity 0.3s;
             }
           }
-          .play-icon {
-            @include abs_center;
-            opacity: 0;
-            transition: opacity 0.3s;
-          }
-        }
 
-      }
-      >p{
-        margin-top: 10px;
-      }
-      >:last-child{
-        color: $font_color_black;
-      }
-      .newMv_name{
-        @include text-ellipsis;//单行显示，多行…
+        }
+        >p{
+          margin-top: 10px;
+        }
+        >:last-child{
+          color: $font_color_black;
+        }
+        .newMv_name{
+          @include text-ellipsis;//单行显示，多行…
+        }
       }
     }
   }

@@ -15,16 +15,9 @@
 export default {
   // name记得写，newmv中一开始没找到该部分
   name:"PlayIcon",
-  data () {
-    return {
-      
-    };
-  },
   props: {
     size: {type: Number, default: 24}
   },
-  components: {},
-
   computed: {
     wrapStyle() {
       return {width: `${this.size}px`,height:`${this.size}px`};
@@ -34,14 +27,6 @@ export default {
       return iconSize;
     },
   },
-
-  mounted () {},
-
-  methods: {},
-
-  created () {
-  }
-
 };
 
 </script>
@@ -53,7 +38,8 @@ export default {
   @include colorWriteRgba;
 
   .play-icon {
-    color: $theme_color;
+    // 使用灰色显示的不明显
+    color: $font_color_red;
   }
 }
 

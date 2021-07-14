@@ -15,6 +15,12 @@ $font-xl:19px;
 $font-xxl:20px;
 $font-xxxl:22px;
 
+// 400相当于normal,bold相当于700；
+$font_weight_s: 500;
+$font_weight_m: 600;
+$font_weight_l: 700;
+$font_weight_xl: 800;
+$font_weight_xxl: 900;
 //使用时直接写函数名就行
 @function font-size($size){
     @return $size+ px;
